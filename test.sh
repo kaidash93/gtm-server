@@ -172,9 +172,9 @@ create_production_dispatch_config() {
   service: ${DEBUG_SERVER}
 - url: '*/*'
   service: default
-- network:
-  name: default
-  subnetwork_name: default
+network:
+    name: default
+    subnetwork_name: default
   "
 
   echo "${config}" > "${config_file}"
