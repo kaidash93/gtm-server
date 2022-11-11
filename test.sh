@@ -16,7 +16,6 @@ WELCOME_TEXT=\
 "Please input the following information to set up your tagging server. For more
 information about the configuration, input '?'. To use the recommended setting
 or your current setting, leave blank.
-
 Press Enter to continue."
 CONTAINER_CONFIG_HELP=\
 "  The container config describes your server-side container. Copy it from
@@ -172,7 +171,11 @@ create_production_dispatch_config() {
 - url: '*/gtm/*'
   service: ${DEBUG_SERVER}
 - url: '*/*'
-  service: default"
+  service: default
+- network:
+  name: default
+  subnetwork_name: default
+  "
 
   echo "${config}" > "${config_file}"
   echo "${config_file}"
@@ -236,7 +239,7 @@ production_deployment() {
       --image-url "${IMG_URL}" --version "${next_deployment_type}"
   else
     gcloud app deploy -q "${config}" \
-      --image-url "${IMG_URL}" --version "${next_deployment_type}" --network=default --subnet=default \
+      --image-url "${IMG_URL}" --version "${next_deployment_type}" \
       --stop-previous-version
   fi
   local source_zip="${TMP_DIR}/source.zip"
@@ -247,7 +250,7 @@ production_deployment() {
     --version "${PROD_ENV}"
   if [[ "${cur_deployment_type}" != "${PROD_ENV}"* ]]; then
     wait_all_operations_complete
-    gcloud app deploy -q "$(create_production_dispatch_config)" --network=default --subnet=default
+    gcloud app deploy -q "$(create_production_dispatch_config)"
   fi
 
   gcloud app versions delete -q "${TEST_ENV}" --verbosity=none || true
