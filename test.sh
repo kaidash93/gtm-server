@@ -87,9 +87,6 @@ env_variables:
   INCLUDE_DEBUG_SERVER: true
   POLICY_SCRIPT_URL: $2
   NODE_OPTIONS: --max-http-header-size=16384
-network:
-  name: default
-  subnetwork_name: default
 handlers:
 - url: /.*
   secure: always
