@@ -159,6 +159,9 @@ create_testing_dispatch_config() {
 "dispatch:
 - url: '*/*'
   service: default
+network:
+name: default
+subnetwork_name: default
 "
 
   echo "${config}" > "${config_file}"
