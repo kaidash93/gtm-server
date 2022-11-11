@@ -236,7 +236,7 @@ production_deployment() {
       --image-url "${IMG_URL}" --version "${next_deployment_type}"
   else
     gcloud app deploy -q "${config}" \
-      --image-url "${IMG_URL}" --version "${next_deployment_type}" \
+      --image-url "${IMG_URL}" --version "${next_deployment_type}" --network="default" --subnet="default" \
       --stop-previous-version
   fi
   local source_zip="${TMP_DIR}/source.zip"
@@ -244,7 +244,7 @@ production_deployment() {
     unzip -q "${source_zip}" -d "${TMP_DIR}" &&
     rm "${source_zip}"
   gcloud app deploy -q "$(create_debug_config "${container_config}")" \
-    --version "${PROD_ENV}" --network=default --subnet:default
+    --version "${PROD_ENV}" --network="default" --subnet="default"
   if [[ "${cur_deployment_type}" != "${PROD_ENV}"* ]]; then
     wait_all_operations_complete
     gcloud app deploy -q "$(create_production_dispatch_config)"
@@ -672,3 +672,4 @@ fi
 echo ""
 echo "Your server deployment is complete."
 exit 0
+
