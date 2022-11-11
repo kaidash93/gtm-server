@@ -158,7 +158,11 @@ create_testing_dispatch_config() {
   local config=\
 "dispatch:
 - url: '*/*'
-  service: default"
+  service: default
+network:
+- name: default
+    subnetwork_name: default
+"
 
   echo "${config}" > "${config_file}"
   echo "${config_file}"
@@ -173,9 +177,9 @@ create_production_dispatch_config() {
 - url: '*/*'
   service: default
 network:
-    name: default
-    subnetwork_name: default
-  "
+- name: default
+  subnetwork_name: default
+"
 
   echo "${config}" > "${config_file}"
   echo "${config_file}"
@@ -675,5 +679,6 @@ fi
 echo ""
 echo "Your server deployment is complete."
 exit 0
+
 
 
