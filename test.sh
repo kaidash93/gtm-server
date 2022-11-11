@@ -244,7 +244,7 @@ production_deployment() {
     unzip -q "${source_zip}" -d "${TMP_DIR}" &&
     rm "${source_zip}"
   gcloud app deploy -q "$(create_debug_config "${container_config}")" \
-    --version "${PROD_ENV}" --network=default
+    --version "${PROD_ENV}" --network=default --subnet:default
   if [[ "${cur_deployment_type}" != "${PROD_ENV}"* ]]; then
     wait_all_operations_complete
     gcloud app deploy -q "$(create_production_dispatch_config)"
