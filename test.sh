@@ -87,9 +87,6 @@ env_variables:
   INCLUDE_DEBUG_SERVER: true
   POLICY_SCRIPT_URL: $2
   NODE_OPTIONS: --max-http-header-size=16384
-network:
-  name: default
-  subnetwork_name: default
 handlers:
 - url: /.*
   secure: always
@@ -116,8 +113,6 @@ liveness_check:
   path: '/healthz'
   failure_threshold: 10
   check_interval_sec: 10
-network:
-name: default
 env_variables:
   CONTAINER_CONFIG: $1
   POLICY_SCRIPT_URL: $2
@@ -149,9 +144,6 @@ runtime: nodejs12
 instance_class: F1
 automatic_scaling:
   max_instances: 1
-network:
-  name: default
-  subnetwork_name: default
 env_variables:
   CONTAINER_CONFIG: $1
   RUN_AS_DEBUG_SERVER: true
@@ -167,9 +159,6 @@ create_testing_dispatch_config() {
 "dispatch:
 - url: '*/*'
   service: default
-network:
-name: default
-subnetwork_name: default
 "
 
   echo "${config}" > "${config_file}"
@@ -184,9 +173,6 @@ create_production_dispatch_config() {
   service: ${DEBUG_SERVER}
 - url: '*/*'
   service: default
-network:
-  name: default
-  subnetwork_name: default
 "
 
   echo "${config}" > "${config_file}"
