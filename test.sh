@@ -104,8 +104,6 @@ create_flex_tagging_server_config() {
 "service: default
 runtime: nodejs
 env: flex
-network: 
-  name: default
 resources:
   cpu: 1
   memory_gb: 0.5
