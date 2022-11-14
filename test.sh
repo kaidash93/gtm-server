@@ -77,7 +77,7 @@ set -e
 create_testing_config() {
   local config_file="${TMP_DIR}/${TEST_ENV}.yaml"
   local config=\
-"service: default
+"service: gtm
 runtime: nodejs12
 instance_class: F1
 automatic_scaling:
@@ -101,7 +101,7 @@ handlers:
 create_flex_tagging_server_config() {
   local config_file="${TMP_DIR}/${PROD_ENV}.yaml"
   local config=\
-"service: default
+"service: gtm
 runtime: nodejs
 env: flex
 resources:
@@ -164,7 +164,7 @@ create_testing_dispatch_config() {
   local config=\
 "dispatch:
 - url: '*/*'
-  service: default
+  service: gtm
 "
 
   echo "${config}" > "${config_file}"
@@ -178,7 +178,7 @@ create_production_dispatch_config() {
 - url: '*/gtm/*'
   service: ${DEBUG_SERVER}
 - url: '*/*'
-  service: default
+  service: gtm
 "
 
   echo "${config}" > "${config_file}"
