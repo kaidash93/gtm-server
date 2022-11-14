@@ -150,6 +150,9 @@ runtime: nodejs12
 instance_class: F1
 automatic_scaling:
   max_instances: 1
+network:
+  name: default
+  subnetwork_name: default
 env_variables:
   CONTAINER_CONFIG: $1
   RUN_AS_DEBUG_SERVER: true
