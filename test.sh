@@ -116,9 +116,6 @@ liveness_check:
   path: '/healthz'
   failure_threshold: 10
   check_interval_sec: 10
-network:
-  name: default
-  subnetwork_name: default
 env_variables:
   CONTAINER_CONFIG: $1
   POLICY_SCRIPT_URL: $2
